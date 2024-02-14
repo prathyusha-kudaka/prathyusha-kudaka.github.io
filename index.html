@@ -3,6 +3,7 @@
 
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -84,7 +85,38 @@
                 shown = true;
             }
         }
+        
     </script>
+    <script>
+        new Vue({
+            el: '#counter-app',
+            data: {
+                counter: 0
+            },
+            methods: {
+                increment: function () {
+                    this.counter++;
+                },
+                decrement: function () {
+                    if (this.counter > 0) {
+                        this.counter--;
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <!-- Your existing body content -->
+
+    <!-- Vue.js Counter Example HTML -->
+    <div id="counter-app">
+        <h2>Counter: {{ counter }}</h2>
+        <button @click="increment">Increment</button>
+        <button @click="decrement">Decrement</button>
+    </div>
+
 </body>
 <div id="digital-clock"></div>
 <script type="text/javascript">
