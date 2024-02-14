@@ -67,8 +67,24 @@
         </div>
     </div>
 </div>
-<div id="email" onclick="showhideEmail()">Show my email</div>
-<script src="email.js"></script>
+</head>
+
+    <div id="email" onclick="showhideEmail()">Show my email</div>
+    <script>
+        var shown = false;
+
+        function showhideEmail() {
+            if (shown) {
+                document.getElementById('email').innerHTML = "Show my email";
+                shown = false;
+            } else {
+                var myemail = "<a href='mailto:kudakasa" + "@" +
+                    "ucmail.uc.edu'>kudakasa" + "@" + "ucmail.uc.edu</a>";
+                document.getElementById('email').innerHTML = myemail;
+                shown = true;
+            }
+        }
+    </script>
 
 <div id="digital-clock"></div>
 <script type="text/javascript">
