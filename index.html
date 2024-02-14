@@ -3,7 +3,7 @@
 
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_TRACKING_ID"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/vendors/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="assets/css/live-resume.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
 
 <body>
@@ -87,30 +88,11 @@
         }
         
     </script>
-    <script>
-        new Vue({
-            el: '#counter-app',
-            data: {
-                counter: 0
-            },
-            methods: {
-                increment: function () {
-                    this.counter++;
-                },
-                decrement: function () {
-                    if (this.counter > 0) {
-                        this.counter--;
-                    }
-                }
-            }
-        });
-    </script>
     <div id="counter-app">
-        <h2>Counter: {{ counter }}</h2>
-        <button @click="increment">Increment</button>
-        <button @click="decrement">Decrement</button>
-    </div>
-
+                <h2>Counter: {{ counter }}</h2>
+                <button @click="increment">Increment</button>
+                <button @click="decrement">Decrement</button>
+            </div>
 </body>
 <div id="digital-clock"></div>
 <script type="text/javascript">
@@ -374,6 +356,24 @@
     <script src="assets/vendors/@popperjs/core/dist/umd/popper-base.min.js"></script>
     <script src="assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="assets/js/live-resume.js"></script>
+    <script>
+        new Vue({
+            el: '#counter-app',
+            data: {
+                counter: 0
+            },
+            methods: {
+                increment: function () {
+                    this.counter++;
+                },
+                decrement: function () {
+                    if (this.counter > 0) {
+                        this.counter--;
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
