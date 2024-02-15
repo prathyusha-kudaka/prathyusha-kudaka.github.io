@@ -475,6 +475,15 @@
             // Fetch a new comic every 1 minute
             setInterval(fetchXKCDComic, 60000);
         };
+        function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    
+    // Use SameSite=None; Secure for cross-site cookies
+    const cookieOptions = `expires=${expires.toUTCString()};path=/;SameSite=None;Secure`;
+
+    document.cookie = `${name}=${value};${cookieOptions}`;
+}
     </script>
 </body>
 
