@@ -12,11 +12,6 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Message</title>
-    <script src="welcome.js"></script>
-</head>
-<body>
-    <div id="welcome-message"></div>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Live Resume :: Home</title>
     <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,500,600,700&display=swap" rel="stylesheet">
@@ -403,60 +398,6 @@
 
     // Fetch a new joke every 1 minute
     setInterval(fetchJoke, 60000);
-</script>
-<script>document.addEventListener('DOMContentLoaded', function() {
-    // Check if the 'lastVisit' cookie exists
-    const lastVisit = getCookie('lastVisit');
-
-    if (lastVisit) {
-        // Display welcome back message with the last visit date/time
-        displayWelcomeBack(lastVisit);
-    } else {
-        // Set a cookie for the current date/time
-        setCookie('lastVisit', getCurrentDateTime(), 365); // Cookie expires in 365 days
-
-        // Display welcome message for the first-time visit
-        displayWelcomeFirstTime();
-    }
-});
-
-// Function to display welcome back message
-function displayWelcomeBack(lastVisit) {
-    const welcomeMessageElement = document.getElementById('welcome-message');
-    welcomeMessageElement.textContent = `Welcome back! Your last visit was ${lastVisit}`;
-}
-
-// Function to display welcome message for the first-time visit
-function displayWelcomeFirstTime() {
-    const welcomeMessageElement = document.getElementById('welcome-message');
-    welcomeMessageElement.textContent = 'Welcome to my homepage!';
-}
-
-// Function to set a cookie
-function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-}
-
-// Function to get the value of a cookie by name
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith(name + '=')) {
-            return cookie.substring(name.length + 1);
-        }
-    }
-    return null;
-}
-
-// Function to get the current date and time in a readable format
-function getCurrentDateTime() {
-    const now = new Date();
-    return now.toLocaleString();
-    
-}
 </script>
 </body>
 
