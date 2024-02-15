@@ -12,6 +12,13 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XKCD Comic Viewer</title>
+</head>
+<body>
+
+<!-- Placeholder for displaying XKCD comic -->
+<div id="xkcd-comic-container"></div>
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <title>Live Resume :: Home</title>
@@ -435,7 +442,33 @@
   // Call the function on page load
   window.onload = displayWelcomeMessage;
 </script>
-<canvas id="myChart" width="712" height="356" style="display: block; box-sizing: border-box; height: 237px; width: 475px;"></canvas>
+<canvas id="myChart" width="712" height="356" style="display: block; box-sizing: border-box; height: 237px; width: 475px;"></canvas><script>
+    // Function to fetch and display XKCD comic
+    async function displayXKCDComic() {
+        const xkcdApiUrl = 'https://xkcd.com/info.0.json';
+
+        try {
+            // Fetch XKCD comic data
+            const response = await fetch(xkcdApiUrl);
+            const data = await response.json();
+
+            // Create HTML to display the comic
+            const comicHtml = `
+                <h2>${data.title}</h2>
+                <img src="${data.img}" alt="${data.alt}">
+                <p>${data.alt}</p>
+            `;
+
+            // Display the comic in the container
+            document.getElementById('xkcd-comic-container').innerHTML = comicHtml;
+        } catch (error) {
+            console.error('Error fetching XKCD comic:', error);
+        }
+    }
+
+    // Call the function on page load
+    window.onload = displayXKCDComic;
+</script>
 </body>
 
 </html>
