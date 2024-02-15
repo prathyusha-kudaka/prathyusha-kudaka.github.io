@@ -426,7 +426,9 @@
       setCookie('lastVisit', currentDate, 365); // Set cookie to expire in 365 days
     } else {
       // Returning visit
-      alert(`Welcome back! Your last visit was ${lastVisit}`);
+      const currentDate = new Date().toLocaleString();
+      alert(`Welcome back! Your last visit was ${lastVisit}. Current date and time: ${currentDate}`);
+      setCookie('lastVisit', currentDate, 365); // Update lastVisit cookie on each visit
     }
   }
 
