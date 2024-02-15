@@ -13,29 +13,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome Message</title>
-    <script src="welcome.js"></script>
-    <style>
-        /* Style for the popup */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-    </style>
-    <div id="popup" class="popup"></div>
+    
     <title>Live Resume :: Home</title>
     <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,500,600,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/vendors/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="assets/css/live-resume.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 </head>
+<script>
+    // JavaScript cookies code
+    function setCookie(name, value, days) {
+      var expires = '';
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = '; expires=' + date.toUTCString();
+      }
+      document.cookie = name + '=' + (value || '') + expires + '; path=/';
+    }
+
+    function getCookie(name) {
+      var nameEQ = name + '=';
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    function checkCookie() {
+      var lastVisit = getCookie('lastVisit');
+      if (lastVisit) {
+        alert('Welcome back! Your last visit was ' + lastVisit);
+      } else {
+        var currentDate = new Date().toUTCString();
+        setCookie('lastVisit', currentDate, 365); // Store last visit for one year
+        alert('Welcome to my homepage!');
+      }
+    }
+
+    checkCookie();
+  </script>
 
 <body>
     <header>
@@ -416,59 +436,6 @@
     // Fetch a new joke every 1 minute
     setInterval(fetchJoke, 60000);
 </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if the 'lastVisit' cookie exists
-    const lastVisit = getCookie('lastVisit');
-
-    if (lastVisit) {
-        // Display welcome back message with the last visit date/time
-        displayPopup(`Welcome back! Your last visit was ${lastVisit}`);
-    } else {
-        // Set a cookie for the current date/time
-        setCookie('lastVisit', getCurrentDateTime(), 365); // Cookie expires in 365 days
-
-        // Display welcome message for the first-time visit
-        displayPopup('Welcome to my homepage!');
-    }
-});
-
-// Function to display a popup
-function displayPopup(message) {
-    const popupElement = document.getElementById('popup');
-    popupElement.textContent = message;
-    popupElement.style.display = 'block';
-
-    // Close the popup after 5 seconds (adjust as needed)
-    setTimeout(() => {
-        popupElement.style.display = 'none';
-    }, 5000);
-}
-
-// Function to set a cookie
-function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-}
-
-// Function to get the value of a cookie by name
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith(name + '=')) {
-            return cookie.substring(name.length + 1);
-        }
-    }
-    return null;
-}
-
-// Function to get the current date and time in a readable format
-function getCurrentDateTime() {
-    const now = new Date();
-    return now.toLocaleString();
-}</script>
 </body>
 
 </html>
