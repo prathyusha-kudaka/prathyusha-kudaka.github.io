@@ -114,7 +114,53 @@
     setInterval(displayTime, 500);
 </script>
 
-<canvas id="analog-clock" width="150" height="150" style="background-color: #999"></canvas>
+ <canvas id="shapeCanvas"></canvas>
+    <canvas id="analog-clock" width="150" height="150" style="background-color: #999"></canvas>
+
+    <script>
+        // Random Shapes Generator
+        (function() {
+            const canvas = document.getElementById('shapeCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = 100; // Adjust the height as needed
+
+            function getRandomShape() {
+                // Replace 'your-api-endpoint' with the actual API endpoint
+                fetch('https://your-api-endpoint')
+                    .then(response => response.json())
+                    .then(data => {
+                        drawShape(data);
+                        setTimeout(getRandomShape, 3000); // Call the function every 3 seconds
+                    })
+                    .catch(error => console.error('Error fetching shape:', error));
+            }
+
+            function drawShape(shapeData) {
+                // Clear the canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Customize the rendering based on the shapeData received from the API
+                ctx.fillStyle = shapeData.color || 'blue';
+
+                if (shapeData.type === 'circle') {
+                    ctx.beginPath();
+                    ctx.arc(canvas.width / 2, canvas.height / 2, 30, 0, 2 * Math.PI);
+                    ctx.fill();
+                } else if (shapeData.type === 'square') {
+                    ctx.fillRect(canvas.width / 2 - 30, canvas.height / 2 - 30, 60, 60);
+                }
+                // Add more shapes and rendering logic as needed
+            }
+
+            // Start the process
+            getRandomShape();
+        })();
+
+        
+
+// <canvas id="analog-clock" width="150" height="150" style="background-color: #999"></canvas>
 <script src="https://waph-uc.github.io/clock.js"></script>
 <script type="text/javascript">
     var canvas = document.getElementById("analog-clock");
@@ -446,66 +492,7 @@
   
   
   
-  <canvas id="myChart" width="712" height="356" style="display: block; box-sizing: border-box; height: 237px; width: 475px;"></canvas>
-  <script>
-  <canvas id="shapesCanvas" width="400" height="400"></canvas>
-
-  <script>
-    const canvas = document.getElementById('shapesCanvas');
-    const ctx = canvas.getContext('2d');
-
-    function generateRandomShape() {
-      return Math.random() < 0.5 ? 'circle' : 'square';
-    }
-
-    function drawShape(shape) {
-      const x = Math.random() * (canvas.width - 50); // Adjust size and position as needed
-      const y = Math.random() * (canvas.height - 50);
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (shape === 'circle') {
-        ctx.beginPath();
-        ctx.arc(x + 25, y + 25, 25, 0, 2 * Math.PI);
-        ctx.stroke();
-      } else if (shape === 'square') {
-        ctx.strokeRect(x, y, 50, 50);
-      }
-    }
-
-    function sendToApi(shape) {
-      // Replace API_ENDPOINT with the actual API endpoint
-      const API_ENDPOINT = 'https://example.com/api/your-endpoint';
-      
-      // Use fetch to send shape data to the API
-      fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ shape }),
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log('Shape sent to API successfully!');
-        } else {
-          console.error('Failed to send shape to API. Status code:', response.status);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
-
-    function generateAndDrawShape() {
-      const currentShape = generateRandomShape();
-      drawShape(currentShape);
-      sendToApi(currentShape);
-    }
-
-    // Set up an interval to generate and draw shapes every 3 seconds
-    setInterval(generateAndDrawShape, 3000);
-  </script>
+  
   
 
 </body>
