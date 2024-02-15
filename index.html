@@ -12,15 +12,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-Y22740NNZB');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Image Slideshow</title>
+    title>Random Image Slideshow</title>
     <style>
         /* Style for the image container */
         .image-container {
@@ -38,7 +30,15 @@
             transition: opacity 1s ease-in-out;
         }
     </style>
+</head>
+<body>
+    <!-- Image container -->
+    <div class="image-container" id="image-container">
+        <!-- Images will be dynamically added here -->
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="randomImage.js"></script>
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
@@ -465,61 +465,7 @@
   </script>
   <canvas id="myChart" width="712" height="356" style="display: block; box-sizing: border-box; height: 237px; width: 475px;"></canvas>
   <script>
-  $(document).ready(function() {
-    // Replace 'YOUR_ACCESS_KEY' with your actual Unsplash Access Key
-    const unsplashAccessKey = 'YOUR_ACCESS_KEY';
-    const apiUrl = `https://api.unsplash.com/photos/random?client_id=${unsplashAccessKey}`;
-
-    // Function to fetch and display a random image
-    function fetchRandomImage() {
-        $.ajax({
-            url: apiUrl,
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                // Update the image source and add it to the container
-                const imageUrl = data.urls.regular;
-                updateImage(imageUrl);
-
-                // Schedule the next image fetch after 2 seconds
-                setTimeout(fetchRandomImage, 2000);
-            },
-            error: function(error) {
-                console.error('Error fetching random image:', error);
-
-                // Retry after 2 seconds in case of an error
-                setTimeout(fetchRandomImage, 2000);
-            }
-        });
-    }
-
-    // Function to update the image in the container with a transition effect
-    function updateImage(imageUrl) {
-        const imageContainer = $('#image-container');
-        const currentImage = imageContainer.find('img');
-
-        // Create a new image element
-        const newImage = $('<img>');
-        newImage.attr('src', imageUrl);
-
-        // Append the new image and remove the old one after the transition
-        newImage.on('load', function() {
-            imageContainer.append(newImage);
-
-            // Apply transition effect by changing opacity
-            newImage.css('opacity', 1);
-            currentImage.css('opacity', 0);
-
-            // Remove the old image from the DOM after the transition
-            setTimeout(function() {
-                currentImage.remove();
-            }, 1000); // Adjust the duration based on the transition time
-        });
-    }
-
-    // Start the random image fetching process
-    fetchRandomImage();
-});</script>
+  
   
 
 </body>
