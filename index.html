@@ -443,9 +443,69 @@
   // Call the function on page load
   window.onload = displayWelcomeMessage;
   </script>
+  
+  
+  
   <canvas id="myChart" width="712" height="356" style="display: block; box-sizing: border-box; height: 237px; width: 475px;"></canvas>
   <script>
-  
+  <canvas id="shapesCanvas" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById('shapesCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function generateRandomShape() {
+      return Math.random() < 0.5 ? 'circle' : 'square';
+    }
+
+    function drawShape(shape) {
+      const x = Math.random() * (canvas.width - 50); // Adjust size and position as needed
+      const y = Math.random() * (canvas.height - 50);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (shape === 'circle') {
+        ctx.beginPath();
+        ctx.arc(x + 25, y + 25, 25, 0, 2 * Math.PI);
+        ctx.stroke();
+      } else if (shape === 'square') {
+        ctx.strokeRect(x, y, 50, 50);
+      }
+    }
+
+    function sendToApi(shape) {
+      // Replace API_ENDPOINT with the actual API endpoint
+      const API_ENDPOINT = 'https://example.com/api/your-endpoint';
+      
+      // Use fetch to send shape data to the API
+      fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ shape }),
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Shape sent to API successfully!');
+        } else {
+          console.error('Failed to send shape to API. Status code:', response.status);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+
+    function generateAndDrawShape() {
+      const currentShape = generateRandomShape();
+      drawShape(currentShape);
+      sendToApi(currentShape);
+    }
+
+    // Set up an interval to generate and draw shapes every 3 seconds
+    setInterval(generateAndDrawShape, 3000);
+  </script>
   
 
 </body>
